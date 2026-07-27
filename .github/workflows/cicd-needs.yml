@@ -1,0 +1,29 @@
+name: CICD 2 - depends_on 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloing the code
+        run: echo "clone code"
+  build:
+    needs: [code]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Building the code
+        run: echo "building the code using Docker"
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing the code
+        run: echo "testing the code"
+  deploy:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploying the code
+        run: echo "Deplying the app"
